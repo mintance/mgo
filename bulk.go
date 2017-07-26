@@ -246,15 +246,21 @@ func (b *Bulk) UpdateAll(pairs ...interface{}) {
 // updated, and the second element defines how to update it.
 // Each pair matches exactly one document for updating at most.
 func (b *Bulk) Upsert(pairs ...interface{}) {
+
 	if len(pairs)%2 != 0 {
 		panic("Bulk.Update requires an even number of parameters")
 	}
+
 	action := b.action(bulkUpdate, len(pairs)/2)
+
 	for i := 0; i < len(pairs); i += 2 {
+
 		selector := pairs[i]
+
 		if selector == nil {
 			selector = bson.D{}
 		}
+
 		action.docs = append(action.docs, &updateOp{
 			Collection: b.c.FullName,
 			Selector:   selector,
@@ -312,12 +318,30 @@ func (b *Bulk) runInsert(action *bulkAction, result *BulkResult, berr *BulkError
 }
 
 func (b *Bulk) runUpdate(action *bulkAction, result *BulkResult, berr *BulkError) bool {
-	lerr, err := b.c.writeOp(bulkUpdateOp(action.docs), b.ordered)
-	if lerr != nil {
-		result.Matched += lerr.N
-		result.Modified += lerr.modified
+
+	for i := 0; i < len(action.docs); i += 1000 {
+
+		docs := []interface{}{}
+
+		if len(action.docs) - i > 1000 {
+			docs = action.docs[i:i + 1000]
+		} else {
+			docs = action.docs[i:]
+		}
+
+		lerr, err := b.c.writeOp(bulkUpdateOp(docs), b.ordered)
+
+		if lerr != nil {
+			result.Matched += lerr.N
+			result.Modified += lerr.modified
+		}
+
+		if b.checkSuccess(action, berr, lerr, err) != true {
+			return false
+		}
 	}
-	return b.checkSuccess(action, berr, lerr, err)
+
+	return true
 }
 
 func (b *Bulk) runRemove(action *bulkAction, result *BulkResult, berr *BulkError) bool {
