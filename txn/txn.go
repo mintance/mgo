@@ -15,7 +15,7 @@ import (
 	"sync"
 
 	"gopkg.in/mgo.v2-unstable"
-	"gopkg.in/mgo.v2-unstable/bson"
+	"github.com/mintance/mgo/bson"
 
 	crand "crypto/rand"
 	mrand "math/rand"

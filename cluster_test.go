@@ -36,7 +36,7 @@ import (
 
 	. "gopkg.in/check.v1"
 	"gopkg.in/mgo.v2-unstable"
-	"gopkg.in/mgo.v2-unstable/bson"
+	"github.com/mintance/mgo/bson"
 )
 
 func (s *S) TestNewSession(c *C) {

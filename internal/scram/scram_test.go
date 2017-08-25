@@ -5,7 +5,7 @@ import (
 	"testing"
 
 	. "gopkg.in/check.v1"
-	"gopkg.in/mgo.v2-unstable/internal/scram"
+	"github.com/mintance/mgo/internal/scram"
 	"strings"
 )
 

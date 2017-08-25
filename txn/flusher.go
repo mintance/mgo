@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"gopkg.in/mgo.v2-unstable"
-	"gopkg.in/mgo.v2-unstable/bson"
+	"github.com/mintance/mgo/bson"
 )
 
 func flush(r *Runner, t *transaction) error {

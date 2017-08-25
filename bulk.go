@@ -3,8 +3,7 @@ package mgo
 import (
 	"bytes"
 	"sort"
-
-	"gopkg.in/mgo.v2-unstable/bson"
+	"github.com/mintance/mgo/bson"
 )
 
 // Bulk represents an operation that can be prepared with several

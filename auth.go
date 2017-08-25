@@ -33,7 +33,6 @@ import (
 	"errors"
 	"fmt"
 	"sync"
-
 	"github.com/mintance/mgo/bson"
 	"github.com/mintance/mgo/internal/scram"
 )

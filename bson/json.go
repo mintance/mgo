@@ -4,9 +4,9 @@ import (
 	"bytes"
 	"encoding/base64"
 	"fmt"
-	"gopkg.in/mgo.v2-unstable/internal/json"
 	"strconv"
 	"time"
+	"github.com/mintance/mgo/internal/json"
 )
 
 // UnmarshalJSON unmarshals a JSON value that may hold non-standard

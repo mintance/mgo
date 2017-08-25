@@ -1,7 +1,7 @@
 package bson_test
 
 import (
-	"gopkg.in/mgo.v2-unstable/bson"
+	"github.com/mintance/mgo/bson"
 
 	. "gopkg.in/check.v1"
 	"reflect"
